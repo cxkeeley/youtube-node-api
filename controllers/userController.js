@@ -78,36 +78,10 @@ const deleteUser = asyncHandler(async (req, res) => {
   res.status(200).json({ message: 'User deleted successfully' })
 })
 
-const getUserAlbums = asyncHandler(async (req, res) => {
-  const { userId } = req.params
-
-  const user = await User.findById(userId).populate('albums')
-
-  if (!user) {
-    return res.status(404).json({ message: 'User not found' })
-  }
-
-  res.status(200).json(user.albums)
-})
-
-const getUserPosts = asyncHandler(async (req, res) => {
-  const { userId } = req.params
-
-  const user = await User.findById(userId).populate('posts')
-
-  if (!user) {
-    return res.status(404).json({ message: 'User not found' })
-  }
-
-  res.status(200).json(user.posts)
-})
-
 export {
   getUsers,
   getUserById,
   createUser,
   updateUser,
   deleteUser,
-  getUserAlbums,
-  getUserPosts,
 }
