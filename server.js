@@ -4,6 +4,7 @@ import dotenv from 'dotenv'
 import colors from 'colors'
 import connectDB from './config/dbConn.js'
 
+// Routes import
 import rootRoutes from './routes/root.js'
 import userRoutes from './routes/userRoutes.js'
 
