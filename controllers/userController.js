@@ -49,21 +49,30 @@ const updateUser = asyncHandler(async (req, res) => {
   const { userId } = req.params
   const { name, username, address, phone, website, company } = req.body
 
-  const user = await User.findById(userId)
+  try {
+    const user = await User.findByIdAndUpdate(
+      userId,
+      {
+        $set: {
+          name,
+          username,
+          address,
+          phone,
+          website,
+          company,
+        },
+      },
+      { new: true }
+    );
 
-  if (!user) {
-    return res.status(404).json({ message: 'User not found' })
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json(user);
+  } catch (err) {
+    res.status(500).json({ message: 'Internal Server Error' });
   }
-
-  if (name) user.name = name
-  if (username) user.username = username
-  if (address) user.address = address
-  if (phone) user.phone = phone
-  if (website) user.website = website
-  if (company) user.company = company
-
-  const updatedUser = await user.save()
-  res.status(200).json(updatedUser)
 })
 
 const deleteUser = asyncHandler(async (req, res) => {
