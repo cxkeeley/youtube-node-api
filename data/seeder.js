@@ -1,3 +1,9 @@
+import fs from 'fs'
+import mongoose from 'mongoose'
+import colors from 'colors'
+import dotenv from 'dotenv'
+import path from 'path'
+import connectDB from '../config/dbConn.js'
 import User from '../models/UserModel'
 
 dotenv.config({ path: '.env' })
